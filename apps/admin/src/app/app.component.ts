@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Message } from '@app/api-interfaces';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
     selector: 'app-root',
@@ -6,5 +8,9 @@ import { Component } from '@angular/core';
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-    title = 'admin';
+    hello$ = this.http.get<Message>('/api/hello');
+
+    constructor(
+        private http: HttpClient,
+    ) {}
 }

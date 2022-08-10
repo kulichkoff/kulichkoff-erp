@@ -46,6 +46,7 @@
       "unitTestRunner": "jest"
     },
     "@nrwl/angular:component": {
+      "changeDetection": "OnPush",
       "style": "scss"
     }
   },
