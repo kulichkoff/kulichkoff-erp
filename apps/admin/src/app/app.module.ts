@@ -13,7 +13,7 @@ import { CoreModule } from './core/core.module';
 @NgModule({
     declarations: [AppComponent],
     imports: [
-        BrowserModule,
+        BrowserModule.withServerTransition({ appId: 'serverApp' }),
         RouterModule.forRoot([], { initialNavigation: 'enabledBlocking' }),
         UiModule,
         HttpClientModule,

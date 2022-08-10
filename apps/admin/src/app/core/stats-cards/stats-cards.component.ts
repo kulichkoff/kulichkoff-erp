@@ -14,7 +14,7 @@ export class StatsCardsComponent {
         {
             label: 'Заказы',
             count: 152,
-            newSinceMonth: 2,
+            newSinceMonth: -2,
             icon: { label: 'pi-shopping-cart', color: 'blue' },
             type: 'count',
             growth: 'negative',
