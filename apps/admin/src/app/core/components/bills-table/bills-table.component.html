@@ -3,8 +3,8 @@
         <p-toolbar styleClass="mb-4 w-full" class="w-full">
             <ng-template pTemplate="left">
                 <button
-                    pButton pRipple label="Добавить" icon="pi pi-plus"
-                    class="p-button-success" (click)="onAddBtnClicked()"></button>
+                    pButton pRipple label="Добавить" icon="pi pi-plus" class="p-button-success"
+                    (click)="onAddBtnClicked()"></button>
             </ng-template>
             <ng-template pTemplate="right">
 
@@ -66,6 +66,8 @@
     </div>
 </div>
 
-<p-dialog header="Создать новый счет" [(visible)]="modelFormDisplayed" [draggable]="false" [modal]="true">
+<p-dialog
+    header="Создать новый счет" [(visible)]="modelFormDisplayed" [draggable]="false" [modal]="true"
+    [style]="{ width: '70rem' }">
     <app-bills-model-form></app-bills-model-form>
 </p-dialog>

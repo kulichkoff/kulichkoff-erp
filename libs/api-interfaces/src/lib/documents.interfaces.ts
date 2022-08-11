@@ -1,14 +1,12 @@
 export interface IFile {
     name: string;
-    size: number;
-    lastModified: number;
     type: string;
     uploadPath: string;
 }
 
 export interface IDocument {
     file: IFile;
-    fromDate: number;
+    fromDate: string;
     documentType: string;
 }
 
@@ -22,9 +20,9 @@ export interface ICargoTransportationBill extends IDocument {
         description: string;
         count: number;
         price: number;
-        sending: { point: string, date: number }[];
-        unloading: { point: string, date: number }[];
-    };
+        sending: { point: string, date: string}[];
+        unloading: { point: string, date: string}[];
+    }[];
     postTrackingNumber?: string;
     totalPrice: number;
 }

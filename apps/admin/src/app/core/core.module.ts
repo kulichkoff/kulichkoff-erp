@@ -16,6 +16,10 @@ import { BillsModelFormComponent } from './components/model-forms/bills-model-fo
 import { DialogModule } from 'primeng/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { DividerModule } from 'primeng/divider';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   declarations: [
@@ -38,6 +42,10 @@ import { ReactiveFormsModule } from '@angular/forms';
         InputTextModule,
         DialogModule,
         ReactiveFormsModule,
+        AutoCompleteModule,
+        InputNumberModule,
+        DividerModule,
+        CalendarModule,
     ],
   exports: [HeaderComponent, StatsCardsComponent],
 })
