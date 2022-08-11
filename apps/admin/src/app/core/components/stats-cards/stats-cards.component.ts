@@ -24,7 +24,7 @@ export class StatsCardsComponent {
             count: 500000,
             newSinceMonth: 30000,
             icon: { label: 'pi-dollar', color: 'green' },
-            type: 'money', // TODO: CurrencyPipe, который оставит все как было, если не money.
+            type: 'money',
             currency: 'RUB',
             growth: 'positive',
         },

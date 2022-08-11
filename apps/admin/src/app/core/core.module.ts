@@ -20,15 +20,16 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DividerModule } from 'primeng/divider';
 import { CalendarModule } from 'primeng/calendar';
+import { SharedPipesModule } from '@app/shared-pipes';
 
 @NgModule({
-  declarations: [
-    HeaderComponent,
-    StatsCardsComponent,
-    ModelPageComponent,
-    BillsTableComponent,
-    BillsModelFormComponent,
-  ],
+    declarations: [
+        HeaderComponent,
+        StatsCardsComponent,
+        ModelPageComponent,
+        BillsTableComponent,
+        BillsModelFormComponent,
+    ],
     imports: [
         CommonModule,
         BrowserAnimationsModule,
@@ -46,7 +47,9 @@ import { CalendarModule } from 'primeng/calendar';
         InputNumberModule,
         DividerModule,
         CalendarModule,
+        SharedPipesModule,
     ],
-  exports: [HeaderComponent, StatsCardsComponent],
+    exports: [HeaderComponent, StatsCardsComponent],
 })
-export class CoreModule {}
+export class CoreModule {
+}
