@@ -4,7 +4,7 @@
             <ng-template pTemplate="left">
                 <button
                     pButton pRipple label="Добавить" icon="pi pi-plus"
-                    class="p-button-success"></button>
+                    class="p-button-success" (click)="onAddBtnClicked()"></button>
             </ng-template>
             <ng-template pTemplate="right">
 
@@ -65,3 +65,7 @@
         </ng-template>
     </div>
 </div>
+
+<p-dialog header="Создать новый счет" [(visible)]="modelFormDisplayed" [draggable]="false" [modal]="true">
+    <app-bills-model-form></app-bills-model-form>
+</p-dialog>

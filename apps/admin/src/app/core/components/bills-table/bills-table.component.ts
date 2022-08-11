@@ -19,6 +19,7 @@ import { PlatformDetectService } from '../../services/platform-detect.service';
 })
 export class BillsTableComponent implements OnInit {
     public bills$?: Observable<ICargoTransportationBill[]>;
+    public modelFormDisplayed = false;
 
     constructor(
         private readonly http: HttpClient,
@@ -30,5 +31,13 @@ export class BillsTableComponent implements OnInit {
             this.bills$ = this.http.get<ICargoTransportationBill[]>('http://kulichkoff.space:3030/bills')
                 .pipe(delay(1000));
         }
+    }
+
+    public onAddBtnClicked() {
+        this.displayModelForm();
+    }
+
+    private displayModelForm() {
+        this.modelFormDisplayed = true;
     }
 }

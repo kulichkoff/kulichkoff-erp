@@ -24,7 +24,7 @@ export interface ICargoTransportationBill extends IDocument {
         price: number;
         sending: { point: string, date: number }[];
         unloading: { point: string, date: number }[];
-        postTrackingNumber: string;
     };
+    postTrackingNumber?: string;
     totalPrice: number;
 }

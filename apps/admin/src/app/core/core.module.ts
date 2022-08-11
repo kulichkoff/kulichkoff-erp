@@ -12,16 +12,22 @@ import { HttpClientModule } from '@angular/common/http';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { ToolbarModule } from 'primeng/toolbar';
 import { InputTextModule } from 'primeng/inputtext';
+import { BillsModelFormComponent } from './components/model-forms/bills-model-form/bills-model-form.component';
+import { DialogModule } from 'primeng/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-    declarations: [
-        HeaderComponent,
-        StatsCardsComponent,
-        ModelPageComponent,
-        BillsTableComponent,
-    ],
+  declarations: [
+    HeaderComponent,
+    StatsCardsComponent,
+    ModelPageComponent,
+    BillsTableComponent,
+    BillsModelFormComponent,
+  ],
     imports: [
         CommonModule,
+        BrowserAnimationsModule,
         ButtonModule,
         RippleModule,
         TableModule,
@@ -30,11 +36,9 @@ import { InputTextModule } from 'primeng/inputtext';
         ContextMenuModule,
         ToolbarModule,
         InputTextModule,
+        DialogModule,
+        ReactiveFormsModule,
     ],
-    exports: [
-        HeaderComponent,
-        StatsCardsComponent,
-    ],
+  exports: [HeaderComponent, StatsCardsComponent],
 })
-export class CoreModule {
-}
+export class CoreModule {}
