@@ -10,6 +10,11 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class PlatformDetectService {
 
+    /**
+     * Is the current session running on the server?
+     *
+     * The variable helps with **SSR**. For example, block concrete data request to Data server.
+     */
     public isServer = !isPlatformBrowser(this.platformId)
 
     constructor(
