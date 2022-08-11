@@ -1,0 +1,43 @@
+<div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
+    <div class="card surface-card px-2 py-3 flex justify-content-center">
+        <ng-container *ngIf="(bills$ | async) as bills; else billsSpinner">
+            <p-table
+                [value]="bills" sortField="fromDate" [scrollable]="true" scrollHeight="800px"
+                scrollDirection="both" class="w-full">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th class="w-2" pSortableColumn="number">Номер
+                            <p-sortIcon field="number"></p-sortIcon>
+                        </th>
+                        <th class="w-3" pSortableColumn="fromDate">От
+                            <p-sortIcon field="fromDate"></p-sortIcon>
+                        </th>
+                        <th class="w-4" pSortableColumn="customerName">Отправитель
+                            <p-sortIcon field="customerName"></p-sortIcon>
+                        </th>
+                        <th class="w-2" pSortableColumn="contractNumber">Номер заявки
+                            <p-sortIcon field="contractNumber"></p-sortIcon>
+                        </th>
+                        <th class="w-2" pSortableColumn="price">Доход
+                            <p-sortIcon field="price"></p-sortIcon>
+                        </th>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-bill>
+                    <tr>
+                        <td class="w-2">{{bill['number']}}</td>
+                        <td class="w-3">{{bill['fromDate']}}</td>
+                        <td class="w-4">{{bill['customerName']}}</td>
+                        <td class="w-2">{{bill['contractNumber']}}</td>
+                        <td class="w-2">{{bill['totalPrice']}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </ng-container>
+
+        <ng-template #billsSpinner>
+            <p-progressSpinner></p-progressSpinner>
+        </ng-template>
+    </div>
+</div>
