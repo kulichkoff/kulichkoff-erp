@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@app/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@app/shared-pipes": ["libs/shared-pipes/src/index.ts"],
       "@app/ui": ["libs/ui/src/index.ts"]
     }
   },

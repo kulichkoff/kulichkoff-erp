@@ -8,6 +8,7 @@
     "api-interfaces": "libs/api-interfaces",
     "app": "apps/app",
     "app-e2e": "apps/app-e2e",
+    "shared-pipes": "libs/shared-pipes",
     "ui": "libs/ui"
   }
 }
