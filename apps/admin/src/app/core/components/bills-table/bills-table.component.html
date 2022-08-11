@@ -1,9 +1,33 @@
 <div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
-    <div class="card surface-card px-2 py-3 flex justify-content-center">
+    <div class="card surface-card px-2 py-3 flex flex-column align-items-center">
+        <p-toolbar styleClass="mb-4 w-full" class="w-full">
+            <ng-template pTemplate="left">
+                <button
+                    pButton pRipple label="Добавить" icon="pi pi-plus"
+                    class="p-button-success"></button>
+            </ng-template>
+            <ng-template pTemplate="right">
+
+            </ng-template>
+        </p-toolbar>
         <ng-container *ngIf="(bills$ | async) as bills; else billsSpinner">
             <p-table
-                [value]="bills" sortField="fromDate" [scrollable]="true" scrollHeight="800px"
-                scrollDirection="both" class="w-full">
+                [value]="bills" dataKey="_id" sortField="fromDate" [scrollable]="true"
+                scrollHeight="800px" scrollDirection="both" class="w-full"
+                [globalFilterFields]="['number', 'fromDate', 'customerName', 'contractNumber', 'price']"
+                #dt>
+                <ng-template pTemplate="caption">
+                    <div class="flex align-items-center justify-content-between">
+                        <h3 class="m-0">Счета</h3>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input
+                                pInputText type="text"
+                                (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                                placeholder="Найти..."/>
+                        </span>
+                    </div>
+                </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
                         <th class="w-2" pSortableColumn="number">Номер

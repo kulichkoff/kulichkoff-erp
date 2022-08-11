@@ -10,6 +10,8 @@ import { TableModule } from 'primeng/table';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { HttpClientModule } from '@angular/common/http';
 import { ContextMenuModule } from 'primeng/contextmenu';
+import { ToolbarModule } from 'primeng/toolbar';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
     declarations: [
@@ -26,6 +28,8 @@ import { ContextMenuModule } from 'primeng/contextmenu';
         ProgressSpinnerModule,
         HttpClientModule,
         ContextMenuModule,
+        ToolbarModule,
+        InputTextModule,
     ],
     exports: [
         HeaderComponent,
