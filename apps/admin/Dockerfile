@@ -1,8 +1,8 @@
 FROM node:16.15.1-alpine AS build
 WORKDIR /usr/src/app
-COPY . .
+COPY ../../ ./
 RUN yarn
-RUN yarn build
+RUN yarn nx run admin:build:prod && yarn nx run admin:server:prod
 
 FROM node:16.15.1-alpine
 WORKDIR /usr/share/app

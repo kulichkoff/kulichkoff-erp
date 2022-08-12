@@ -1,0 +1,7 @@
+version: '3'
+services:
+  admin:
+    build: apps/admin
+    ports:
+      - "8040:4000"
+    container_name: admin
