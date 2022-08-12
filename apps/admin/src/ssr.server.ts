@@ -6,25 +6,31 @@ import { join } from 'path';
 
 import { AppServerModule } from './main.server';
 import { APP_BASE_HREF } from '@angular/common';
-import { existsSync } from 'fs';
 import {
-    getDocument,
-    getWindow,
-} from 'ssr-window';
+    existsSync,
+    readFileSync,
+} from 'fs';
+import * as domino from 'domino';
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app() {
     const server = express();
     const distFolder = join(process.cwd(), 'dist/apps/admin/browser');
     const indexHtml = existsSync(join(distFolder, 'index.html')) ? 'index.html' : 'index';
+    const indexHtmlTemplate = readFileSync(join(distFolder, indexHtml)).toString();
 
     // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
     server.engine('html', ngExpressEngine({
         bootstrap: AppServerModule,
     }));
 
-    (global as any).window = getWindow();
-    (global as any).document = getDocument();
+    const win = domino.createWindow(indexHtmlTemplate);
+
+    global['window'] = win as any;
+    global['document'] = win.document;
+    global['self'] = win as any;
+    global['navigator'] = win.navigator;
+    global['getComputedStyle'] = win.getComputedStyle;
 
     server.set('view engine', 'html');
     server.set('views', distFolder);
