@@ -12,7 +12,7 @@ import {
 export class HeaderComponent {
     public modelType = 'Счета';
     public modelStats = {
-        totalCount: 67,
+        totalCount: 46,
         currentMonth: 2,
     };
 }
