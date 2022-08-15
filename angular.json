@@ -4,6 +4,7 @@
   "projects": {
     "admin": "apps/admin",
     "admin-e2e": "apps/admin-e2e",
+    "api-bills-db": "apps/api/bills-db",
     "api-document-generator": "apps/api/document-generator",
     "api-interfaces": "libs/api-interfaces",
     "shared-pipes": "libs/shared-pipes",
