@@ -9,6 +9,8 @@ import {
     Validators,
 } from '@angular/forms';
 import { ICargoTransportationBill } from '@app/api-interfaces';
+import { HttpClient } from '@angular/common/http';
+import { saveAs } from 'file-saver';
 
 @Component({
     selector: 'app-bills-model-form',
@@ -58,6 +60,7 @@ export class BillsModelFormComponent {
 
     constructor(
         private readonly fb: FormBuilder,
+        private readonly http: HttpClient,
     ) {}
 
     public get servicesArray(): FormArray {
@@ -78,6 +81,10 @@ export class BillsModelFormComponent {
 
     public onSubmit() {
         console.log(this.modelFormValue);
+        this.http.post('/api/templates/bills', this.modelFormValue, { responseType: 'blob' })
+            .subscribe((file) => {
+                saveAs(file, `Счет_Акт №${this.modelFormValue.number}.docx`);
+            });
     }
 
     public searchCustomerName(event: { query: string }) {

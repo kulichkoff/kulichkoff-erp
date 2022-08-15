@@ -67,6 +67,9 @@
           "browserTarget": "admin:build:development"
         }
       },
+      "options": {
+        "proxyConfig": "apps/app/proxy.conf.json"
+      },
       "defaultConfiguration": "development"
     },
     "extract-i18n": {
