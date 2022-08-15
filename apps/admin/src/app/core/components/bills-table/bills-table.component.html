@@ -17,12 +17,12 @@
                 [globalFilterFields]="['number', 'fromDate', 'customerName', 'contractNumber', 'price']"
                 #dt>
                 <ng-template pTemplate="caption">
-                    <div class="flex align-items-center justify-content-between">
-                        <h3 class="m-0">Счета</h3>
+                    <div class="flex align-items-center justify-content-between flex-column lg:flex-row">
+                        <h3 class="m-0 mb-2 lg:mb-0">Счета</h3>
                         <span class="p-input-icon-left">
                             <i class="pi pi-search"></i>
                             <input
-                                pInputText type="text"
+                                pInputText type="text" class="w-full"
                                 (input)="dt.filterGlobal($any($event.target).value, 'contains')"
                                 placeholder="Найти..."/>
                         </span>
