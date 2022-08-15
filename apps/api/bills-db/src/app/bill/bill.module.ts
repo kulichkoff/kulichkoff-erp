@@ -16,7 +16,7 @@ import { UnloadingPoint } from '../../models/unloading-point.entity';
     ],
     controllers: [
         BillController,
-    ]
+    ],
 })
 export class BillModule {
 }

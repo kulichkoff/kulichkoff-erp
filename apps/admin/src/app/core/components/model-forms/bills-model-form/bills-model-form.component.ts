@@ -85,6 +85,11 @@ export class BillsModelFormComponent {
             .subscribe((file) => {
                 saveAs(file, `Счет_Акт №${this.modelFormValue.number}.docx`);
             });
+
+        this.http.post('/api/data/bill', this.modelFormValue)
+            .subscribe((data) => {
+                console.log(data);
+            })
     }
 
     public searchCustomerName(event: { query: string }) {

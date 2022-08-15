@@ -26,9 +26,9 @@ export class Service extends BaseEntity {
     @Column({ type: 'float' })
     price: number;
 
-    @OneToMany(() => SendingPoint, (point) => point.service)
+    @OneToMany(() => SendingPoint, (point) => point.service, { cascade: true })
     sending: SendingPoint[];
 
-    @OneToMany(() => UnloadingPoint, (point) => point.service)
+    @OneToMany(() => UnloadingPoint, (point) => point.service, { cascade: true })
     unloading: UnloadingPoint[];
 }

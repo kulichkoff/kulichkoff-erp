@@ -68,7 +68,7 @@
         }
       },
       "options": {
-        "proxyConfig": "apps/app/proxy.conf.json"
+        "proxyConfig": "apps/admin/proxy.conf.json"
       },
       "defaultConfiguration": "development"
     },

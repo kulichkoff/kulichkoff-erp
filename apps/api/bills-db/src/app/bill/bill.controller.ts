@@ -1,8 +1,11 @@
 import {
+    Body,
     Controller,
     Get,
+    Post,
 } from '@nestjs/common';
 import { BillService } from './bill.service';
+import { ICargoTransportationBill } from '@app/api-interfaces';
 
 @Controller('data/bill')
 export class BillController {
@@ -12,6 +15,11 @@ export class BillController {
 
     @Get()
     public async getAll() {
-        return this.service.getAll();
+        return await this.service.getAll();
+    }
+
+    @Post()
+    public async createOne(@Body() billData: ICargoTransportationBill) {
+        return await this.service.createOne(billData);
     }
 }

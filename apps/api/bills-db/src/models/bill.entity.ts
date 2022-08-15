@@ -23,7 +23,7 @@ export class Bill extends BaseEntity {
     @Column({ type: 'float' })
     totalPrice: number;
 
-    @OneToMany(() => Service, (service) => service.bill)
+    @OneToMany(() => Service, (service) => service.bill, { cascade: true })
     services: Service[];
 
     @Column({ type: 'varchar', length: 64, nullable: true })
