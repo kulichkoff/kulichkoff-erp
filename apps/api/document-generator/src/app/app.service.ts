@@ -22,6 +22,8 @@ export class AppService {
             data: {
                 ...billData,
                 date: new Date().toLocaleDateString('ru-RU'),
+                customerCity: 'г.Москва',
+                customerBill: '9721157244',
                 totalPrice: totalPrice,
                 totalPriceNumeral: convertNumberToWordsRu(totalPrice),
             },
