@@ -17,6 +17,7 @@ export class AppService {
             data: {
                 ...billData,
                 date: new Date().toLocaleDateString('ru-RU'),
+                totalPrice: this.getTotalPrice(billData.services),
             },
             cmdDelimiter: ['{{', '}}'],
         });
@@ -24,5 +25,14 @@ export class AppService {
         const filePath = path.join(__dirname, 'assets', 'report.docx');
         fs.writeFileSync(filePath, buffer);
         Logger.log(`Saved a [BILL] Report to ${filePath}`);
+    }
+
+    private getTotalPrice(services: ICargoTransportationBill['services']): number {
+        let totalPrice = 0;
+        for (const service of services) {
+            totalPrice += service.price;
+        }
+
+        return totalPrice;
     }
 }
