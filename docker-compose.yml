@@ -6,4 +6,10 @@ services:
       context: ./
     ports:
       - "8040:4000"
-    container_name: admin
+
+  api-document-generator:
+    build:
+      dockerfile: apps/api/document-generator/Dockerfile
+      context: ./
+    ports:
+      - "8030:3333"

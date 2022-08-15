@@ -10,7 +10,8 @@
     "start:api": "nx run api:serve",
     "build": "yarn run clear:dist && nx run-many --target=build --all && nx run-many --target=server --all",
     "test": "nx run-many --target=test --all",
-    "clear:dist": "rimraf dist"
+    "clear:dist": "rimraf dist",
+    "deploy": "docker-compose --context remote_kulichkoff build && docker-compose --context remote_kulichkoff up -d"
   },
   "private": true,
   "dependencies": {
