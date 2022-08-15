@@ -6,18 +6,22 @@ import * as fs from 'fs';
 import { ICargoTransportationBill } from '@app/api-interfaces';
 import createReport from 'docx-templates';
 import * as path from 'path';
+import { convert as convertNumberToWordsRu } from 'number-to-words-ru'
+
 
 @Injectable()
 export class AppService {
     private _template = fs.readFileSync(path.join(__dirname, 'assets/templates/bills-template.docx'));
 
     public async createBillsReport(billData: ICargoTransportationBill) {
+        const totalPrice = this.getTotalPrice(billData.services);
         const buffer = await createReport({
             template: this._template,
             data: {
                 ...billData,
                 date: new Date().toLocaleDateString('ru-RU'),
-                totalPrice: this.getTotalPrice(billData.services),
+                totalPrice: totalPrice,
+                totalPriceNumeral: convertNumberToWordsRu(totalPrice)
             },
             cmdDelimiter: ['{{', '}}'],
         });

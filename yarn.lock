@@ -8374,6 +8374,11 @@ nth-check@^2.0.1:
   dependencies:
     boolbase "^1.0.0"
 
+number-to-words-ru@^2.3.4:
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/number-to-words-ru/-/number-to-words-ru-2.3.4.tgz#36745e450d14749be4999fd2bc4d5192f763fcc0"
+  integrity sha512-2kMn+py2MOap3wpiLL4Itp6q5DTIoMg7AU0jJ0VKpS3pSDU5Muc6ABoK0xMwqpMvNk41tPnCgOn2exGCIlNs3A==
+
 nwsapi@^2.2.0:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/nwsapi/-/nwsapi-2.2.1.tgz#10a9f268fbf4c461249ebcfe38e359aa36e2577c"
