@@ -28,6 +28,7 @@
     "@nestjs/platform-express": "^8.0.0",
     "@nguniversal/express-engine": "^14.0.3",
     "@nrwl/angular": "14.4.3",
+    "docx-templates": "^4.9.2",
     "domino": "^2.1.6",
     "primeflex": "^3.2.1",
     "primeicons": "^5.0.0",
