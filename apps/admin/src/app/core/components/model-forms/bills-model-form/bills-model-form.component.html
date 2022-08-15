@@ -2,25 +2,35 @@
     [formGroup]="modelForm" (ngSubmit)="onSubmit()"
     class="flex flex-column justify-content-between h-full">
     <div class="grid pt-4">
-        <div class="flex flex-column col-12">
-            <h3>Заказчик</h3>
-            <p-autoComplete
-                styleClass="w-full" inputStyleClass="w-full" formControlName="customerName"
-                [suggestions]="customersResult"
-                (completeMethod)="searchCustomerName($event)"></p-autoComplete>
-        </div>
-
-        <div class="flex flex-column lg:col-6 col-12">
+        <div class="flex flex-column lg:col-3 col-12">
             <h3>Номер счета</h3>
             <p-inputNumber
                 formControlName="number" inputStyleClass="w-full" [useGrouping]="false"
                 styleClass="w-full"></p-inputNumber>
         </div>
-        <div class="flex flex-column lg:col-6 col-12">
+
+        <div class="flex flex-column lg:col-5 col-12">
+            <h3>От</h3>
+            <p-calendar
+                formControlName="fromDate" [firstDayOfWeek]="1"
+                [showIcon]="true" styleClass="w-full" class="w-full"
+                dateFormat="dd.mm.yy" dataType="string"
+            ></p-calendar>
+        </div>
+
+        <div class="flex flex-column lg:col-4 col-12">
             <h3>Номер заявки</h3>
             <p-inputNumber
                 formControlName="contractNumber" inputStyleClass="w-full" [useGrouping]="false"
                 styleClass="w-full"></p-inputNumber>
+        </div>
+
+        <div class="flex flex-column lg:col-7 col-12">
+            <h3>Заказчик</h3>
+            <p-autoComplete
+                styleClass="w-full" inputStyleClass="w-full" formControlName="customerName"
+                [suggestions]="customersResult"
+                (completeMethod)="searchCustomerName($event)"></p-autoComplete>
         </div>
 
         <p-divider styleClass="w-full" class="w-full"></p-divider>
@@ -29,7 +39,7 @@
             <ng-container *ngFor="let service of servicesArray.controls; let serviceIdx = index">
                 <ng-container [formGroup]="$any(service)">
                     <div class="mt-5 grid w-full">
-                        <div class="flex flex-column lg:col-6 col-12">
+                        <div class="flex flex-column lg:col-4 col-12">
                             <h3>Цена</h3>
                             <p-inputNumber
                                 formControlName="price" inputStyleClass="w-full" styleClass="w-full"
@@ -41,13 +51,13 @@
                             *ngFor="let sendingItem of sendingArray.controls; let sendingIdx = index">
                             <ng-container [formGroup]="$any(sendingItem)">
                                 <div class="mt-6 p-2 grid w-full">
-                                    <div class="flex flex-column lg:col-6 col-12">
+                                    <div class="flex flex-column lg:col-4 col-12">
                                         <h3>Точка загрузки №{{sendingIdx + 1}}</h3>
                                         <input
                                             type="text" pInputText formControlName="point"
                                             class="w-full" placeholder="г.Москва">
                                     </div>
-                                    <div class="flex flex-column lg:col-6 col-12">
+                                    <div class="flex flex-column lg:col-4 col-12">
                                         <h3>Дата загрузки</h3>
                                         <p-calendar
                                             formControlName="date" [firstDayOfWeek]="1"
@@ -63,13 +73,13 @@
                             *ngFor="let unloadingItem of unloadingArray.controls; let unloadingIdx = index">
                             <ng-container [formGroup]="$any(unloadingItem)">
                                 <div class="mt-2 p-2 grid w-full">
-                                    <div class="flex flex-column lg:col-6 col-12">
+                                    <div class="flex flex-column lg:col-4 col-12">
                                         <h3>Точка выгрузки №{{unloadingIdx + 1}}</h3>
                                         <input
                                             type="text" pInputText formControlName="point"
                                             class="w-full" placeholder="г.Волгоград">
                                     </div>
-                                    <div class="flex flex-column lg:col-6 col-12">
+                                    <div class="flex flex-column lg:col-4 col-12">
                                         <h3>Дата выгрузки</h3>
                                         <p-calendar
                                             formControlName="date" [firstDayOfWeek]="1"

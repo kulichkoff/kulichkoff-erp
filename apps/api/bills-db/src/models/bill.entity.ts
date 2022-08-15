@@ -28,4 +28,7 @@ export class Bill extends BaseEntity {
 
     @Column({ type: 'varchar', length: 64, nullable: true })
     postTrackingNumber?: string;
+
+    @Column({ type: 'varchar', length: 32 })
+    fromDate: string;
 }

@@ -21,7 +21,7 @@ export class AppService {
             template: this._template,
             data: {
                 ...billData,
-                date: new Date().toLocaleDateString('ru-RU'),
+                date: billData.fromDate,
                 customerCity: 'г.Москва',
                 customerBill: '9721157244',
                 totalPrice: totalPrice,

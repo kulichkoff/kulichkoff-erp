@@ -58,7 +58,7 @@ class ConfigService {
             password: this.getValue('POSTGRES_PASSWORD'),
             database: this.getValue('POSTGRES_DATABASE', false) || 'kf_erp',
 
-            entities: [path.join('dist', '**', '*.entity.js')],
+            entities: [path.join('**', '*.entity{.ts,.js}')],
 
             migrationsTableName: 'migration',
             migrations: [path.join('apps', 'api', 'bills-db', 'src', 'migrations', '*.ts')],

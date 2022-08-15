@@ -6,7 +6,7 @@
   "password": "rbnftw11",
   "database": "kf_erp",
   "entities": [
-    "dist/**/*.entity.js"
+    "**/*.entity{.ts,.js}"
   ],
   "migrationsTableName": "migration",
   "migrations": [

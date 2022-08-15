@@ -25,6 +25,7 @@ export class BillsModelFormComponent {
         customerId: '', // renders on the server
         customerName: '',
         contractNumber: '',
+        fromDate: new Date().toLocaleDateString('ru-RU'),
         totalPrice: 0, // renders on the server
         services: this.fb.array([
             this.fb.group({
