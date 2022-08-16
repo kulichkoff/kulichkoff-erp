@@ -1,15 +1,18 @@
 import {
     Column,
     Entity,
+    ManyToOne,
     OneToMany,
 } from 'typeorm';
 import { BaseEntity } from './base.entity';
 import { Service } from './service.entity';
+import { Customer } from './customer.entity';
 
 @Entity('bill')
 export class Bill extends BaseEntity {
 
-    customerId: string;
+    @ManyToOne(() => Customer, (customer) => customer.bills)
+    customer: Customer;
 
     @Column({ type: 'varchar', length: 300 })
     customerName: string;

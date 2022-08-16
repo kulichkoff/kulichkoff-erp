@@ -22,7 +22,6 @@ export class BillsModelFormComponent {
 
     public modelForm: FormGroup = this.fb.group({
         number: ['', Validators.required],
-        customerId: '', // renders on the server
         customerName: '',
         contractNumber: '',
         fromDate: new Date().toLocaleDateString('ru-RU'),
@@ -77,7 +76,12 @@ export class BillsModelFormComponent {
     }
 
     public get modelFormValue(): ICargoTransportationBill {
-        return this.modelForm.value as ICargoTransportationBill;
+        return {
+            ...this.modelForm.value,
+            customer: {
+                name: this.modelForm.value.customerName
+            }
+        } as ICargoTransportationBill;
     }
 
     public onSubmit() {
@@ -90,7 +94,7 @@ export class BillsModelFormComponent {
         this.http.post('/api/data/bill', this.modelFormValue)
             .subscribe((data) => {
                 console.log(data);
-            })
+            });
     }
 
     public searchCustomerName(event: { query: string }) {

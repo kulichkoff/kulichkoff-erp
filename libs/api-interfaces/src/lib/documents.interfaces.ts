@@ -1,3 +1,5 @@
+import { ICustomer } from './customer.interfaces';
+
 export interface IFile {
     name: string;
     type: string;
@@ -11,8 +13,7 @@ export interface IDocument {
 }
 
 export interface ICargoTransportationBill extends IDocument {
-    customerId: string;
-    customerName: string;
+    customer: ICustomer;
     number: number;
     contractNumber: number;
     services: {
