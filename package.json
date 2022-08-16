@@ -13,7 +13,9 @@
     "clear:dist": "rimraf dist",
     "deploy": "docker-compose --context remote_kulichkoff build && docker-compose --context remote_kulichkoff up -d",
     "pretypeorm": "(rm ormconfig.json || :) && ts-node -r tsconfig-paths/register tools/write-typeorm-config.ts",
-    "typeorm": "ts-node -r tsconfig-paths/register node_modules/typeorm/cli.js -f ormconfig"
+    "typeorm": "ts-node -r tsconfig-paths/register node_modules/typeorm/cli.js -f ormconfig",
+    "migration:generate": "yarn typeorm migration:generate -n CreateTables",
+    "migrate": "yarn typeorm migration:run"
   },
   "private": true,
   "dependencies": {

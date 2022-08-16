@@ -1,5 +1,18 @@
 version: '3'
 services:
+
+  postgres-db:
+    image: postgres:13.3
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: kf_erp
+      PGDATA: "/var/lib/postgresql/data"
+    volumes:
+      - /var/www/kulichkoff.space/db:/var/lib/postgresql/data
+    networks:
+      - postgres
+
   admin:
     build:
       dockerfile: apps/admin/Dockerfile
@@ -13,3 +26,22 @@ services:
       context: ./
     ports:
       - "8030:3333"
+
+  api-bills-db:
+    build:
+      dockerfile: apps/api/bills-db/Dockerfile
+      context: ./
+    environment:
+      POSTGRES_HOST: postgres-db
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      MODE: PROD
+    ports:
+      - "8031:3333"
+    depends_on:
+      - postgres-db
+    networks:
+      - postgres
+
+networks:
+  postgres:
+    driver: bridge
