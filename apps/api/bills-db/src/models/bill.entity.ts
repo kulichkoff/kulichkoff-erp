@@ -14,9 +14,6 @@ export class Bill extends BaseEntity {
     @ManyToOne(() => Customer, (customer) => customer.bills)
     customer: Customer;
 
-    @Column({ type: 'varchar', length: 300 })
-    customerName: string;
-
     @Column({ type: 'int' })
     number: number;
 

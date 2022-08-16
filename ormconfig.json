@@ -1,6 +1,6 @@
 {
   "type": "postgres",
-  "host": "kulichkoff.space",
+  "host": "localhost",
   "port": 5432,
   "username": "postgres",
   "password": "rbnftw11",
@@ -12,6 +12,9 @@
   "migrations": [
     "**/migrations/*{.ts,.js}"
   ],
+  "cli": {
+    "migrationsDir": "apps/api/bills-db/src/migrations"
+  },
   "synchronize": false,
   "ssl": false
 }

@@ -63,6 +63,10 @@ class ConfigService {
             migrationsTableName: 'migration',
             migrations: [path.join('**', 'migrations', '*{.ts,.js}')],
 
+            cli: {
+                migrationsDir: 'apps/api/bills-db/src/migrations',
+            },
+
             synchronize: false,
 
             ssl: false,
