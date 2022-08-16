@@ -11,8 +11,6 @@ COPY --from=build /usr/src/app/package.json \
     /usr/src/app/yarn.lock \
     /usr/src/app/ormconfig.json \
     ./
-COPY --from=build /usr/src/app/tools/ tools/
-COPY --from=build /usr/src/app/apps/api/bills-db/src/config/config.service.ts apps/api/bills-db/src/config/
 RUN yarn install --prod --ignore-scripts
 EXPOSE 3333
-CMD ["yarn", "migrate", "&&", "node", "dist/apps/api/bills-db/main.js"]
+CMD ["sh", "-c", "node dist/apps/api/bills-db/main.js"]

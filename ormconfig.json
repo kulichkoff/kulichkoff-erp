@@ -1,20 +1,17 @@
 {
   "type": "postgres",
-  "host": "localhost",
+  "host": "kulichkoff.space",
   "port": 5432,
   "username": "postgres",
   "password": "rbnftw11",
   "database": "kf_erp",
   "entities": [
-    "**/*.entity{.ts,.js}"
+    "**/models/*{.ts,.js}"
   ],
   "migrationsTableName": "migration",
   "migrations": [
-    "apps/api/bills-db/src/migrations/*.ts"
+    "**/migrations/*{.ts,.js}"
   ],
   "synchronize": false,
-  "cli": {
-    "migrationsDir": "apps/api/bills-db/src/migrations"
-  },
   "ssl": false
 }

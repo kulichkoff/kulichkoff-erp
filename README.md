@@ -20,3 +20,19 @@ yarn nx run [application-name]:serve
 
 - Use Docker to deploy this microservice architecture.
 - Documents generation.
+
+## Migrations
+
+Migrations run remotely in manual mode.
+
+To migrate, you have to generate new migration
+
+```shell
+POSTGRES_PASSWORD=<pass> POSTGRES_HOST=<host> yarn migration:generate
+```
+
+After that, there is a possibility to run the migration
+
+```shell
+POSTGRES_PASSWORD=<pass> POSTGRES_HOST=<host> yarn migrate
+```

@@ -15,7 +15,8 @@
     "pretypeorm": "(rm ormconfig.json || :) && ts-node -r tsconfig-paths/register tools/write-typeorm-config.ts",
     "typeorm": "ts-node -r tsconfig-paths/register node_modules/typeorm/cli.js -f ormconfig",
     "migration:generate": "yarn typeorm migration:generate -n CreateTables",
-    "migrate": "yarn typeorm migration:run"
+    "migrate": "yarn typeorm migration:run",
+    "create-entities-index": "ts-node --project tools/tsconfig.tools.json tools/create-entities.ts"
   },
   "private": true,
   "dependencies": {
@@ -36,6 +37,7 @@
     "@nrwl/angular": "14.4.3",
     "docx-templates": "^4.9.2",
     "domino": "^2.1.6",
+    "fast-glob": "^3.2.11",
     "file-saver": "^2.0.5",
     "number-to-words-ru": "^2.3.4",
     "pg": "^8.7.3",

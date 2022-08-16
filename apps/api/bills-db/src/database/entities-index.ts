@@ -1,0 +1,6 @@
+export * from '../models/base.entity'
+export * from '../models/bill.entity'
+export * from '../models/sending-point.entity'
+export * from '../models/service.entity'
+export * from '../models/transporting-point.entity'
+export * from '../models/unloading-point.entity'

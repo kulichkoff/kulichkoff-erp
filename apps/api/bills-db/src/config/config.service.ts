@@ -58,17 +58,14 @@ class ConfigService {
             password: this.getValue('POSTGRES_PASSWORD'),
             database: this.getValue('POSTGRES_DATABASE', false) || 'kf_erp',
 
-            entities: [path.join('**', '*.entity{.ts,.js}')],
+            entities: ['**/models/*{.ts,.js}'],
 
             migrationsTableName: 'migration',
-            migrations: [path.join('apps', 'api', 'bills-db', 'src', 'migrations', '*.ts')],
+            migrations: [path.join('**', 'migrations', '*{.ts,.js}')],
+
             synchronize: false,
 
-            cli: {
-                migrationsDir: path.join('apps', 'api', 'bills-db', 'src', 'migrations'),
-            },
-
-            ssl: this.isProduction,
+            ssl: false,
         };
     }
 
