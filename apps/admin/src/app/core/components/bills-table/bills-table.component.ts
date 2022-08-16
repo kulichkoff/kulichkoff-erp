@@ -28,7 +28,7 @@ export class BillsTableComponent implements OnInit {
 
     public ngOnInit() {
         if (!this.platformDetectService.isServer) {
-            this.bills$ = this.http.get<ICargoTransportationBill[]>('http://kulichkoff.space:3030/bills')
+            this.bills$ = this.http.get<ICargoTransportationBill[]>('/api/data/bill')
                 .pipe(delay(1000));
         }
     }
