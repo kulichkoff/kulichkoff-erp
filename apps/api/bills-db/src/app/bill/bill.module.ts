@@ -6,13 +6,23 @@ import { BillService } from './bill.service';
 import { BillController } from './bill.controller';
 import { SendingPoint } from '../../models/sending-point.entity';
 import { UnloadingPoint } from '../../models/unloading-point.entity';
+import { Customer } from '../../models/customer.entity';
+import { CustomerService } from '../customer/customer.service';
 
 @Module({
     imports: [
-        TypeOrmModule.forFeature([Bill, Service, SendingPoint, UnloadingPoint]),
+        TypeOrmModule.forFeature([
+            Bill,
+            Service,
+            SendingPoint,
+            UnloadingPoint,
+
+            Customer,
+        ]),
     ],
     providers: [
         BillService,
+        CustomerService,
     ],
     controllers: [
         BillController,

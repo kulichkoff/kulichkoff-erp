@@ -1,6 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import {
+    FindConditions,
+    Repository,
+} from 'typeorm';
 import { Customer } from '../../models/customer.entity';
 import { ICustomer } from '@app/api-interfaces';
 
@@ -19,4 +22,7 @@ export class CustomerService {
         return await this.repo.find();
     }
 
+    public async find(query: FindConditions<Customer>): Promise<Customer> {
+        return await this.repo.findOneOrFail({ where: query });
+    }
 }
