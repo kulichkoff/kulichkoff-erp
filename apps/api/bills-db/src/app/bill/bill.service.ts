@@ -29,7 +29,15 @@ export class BillService {
 
     public async createOne(billData: ICargoTransportationBill): Promise<Bill> {
         try {
-            const customer = await this.customerService.find({ name: billData.customer.name });
+            const nameTextSplit = billData.customer.name
+                .replace('ИНН', '')
+                .split(', ');
+
+            const customer = await this.customerService.find({
+                name: nameTextSplit[0].trim(),
+                city: nameTextSplit[1].trim(),
+                inn: nameTextSplit[2].trim(),
+            });
 
             const completedObject = {
                 ...billData,

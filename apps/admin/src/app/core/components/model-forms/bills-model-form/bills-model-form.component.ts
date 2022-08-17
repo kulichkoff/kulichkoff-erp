@@ -64,8 +64,10 @@ export class BillsModelFormComponent implements OnInit {
     public ngOnInit() {
         this.http.get<ICustomer[]>('/api/data/customer')
             .subscribe((customers) => {
-                this.customersList = customers.map((customer) => customer.name);
-            })
+                this.customersList = customers.map(
+                    (customer) => `${customer.name}, ${customer.city}, ИНН ${customer.inn}`,
+                );
+            });
     }
 
     public get servicesArray(): FormArray {
@@ -84,8 +86,8 @@ export class BillsModelFormComponent implements OnInit {
         return {
             ...this.modelForm.value,
             customer: {
-                name: this.modelForm.value.customerName
-            }
+                name: this.modelForm.value.customerName,
+            },
         } as ICargoTransportationBill;
     }
 
