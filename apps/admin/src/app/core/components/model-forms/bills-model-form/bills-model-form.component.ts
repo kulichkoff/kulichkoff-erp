@@ -9,12 +9,10 @@ import {
     FormGroup,
     Validators,
 } from '@angular/forms';
-import {
-    ICargoTransportationBill,
-    ICustomer,
-} from '@app/api-interfaces';
-import { HttpClient } from '@angular/common/http';
+import { ICargoTransportationBill } from '@app/api-interfaces';
 import { saveAs } from 'file-saver';
+import { CustomersService } from '../../../services/customers.service';
+import { BillsService } from '../../../services/bills.service';
 
 @Component({
     selector: 'app-bills-model-form',
@@ -58,16 +56,17 @@ export class BillsModelFormComponent implements OnInit {
 
     constructor(
         private readonly fb: FormBuilder,
-        private readonly http: HttpClient,
+        private readonly customersService: CustomersService,
+        private readonly billsService: BillsService,
     ) {}
 
     public ngOnInit() {
-        this.http.get<ICustomer[]>('/api/data/customer')
-            .subscribe((customers) => {
-                this.customersList = customers.map(
-                    (customer) => `${customer.name}, ${customer.city}, ИНН ${customer.inn}`,
-                );
-            });
+        this.customersService.getAll()
+        .subscribe((customers) => {
+            this.customersList = customers.map(
+                (customer) => `${customer.name}, ${customer.city}, ИНН ${customer.inn}`,
+            );
+        });
     }
 
     public get servicesArray(): FormArray {
@@ -93,12 +92,12 @@ export class BillsModelFormComponent implements OnInit {
 
     public onSubmit() {
         console.log(this.modelFormValue);
-        this.http.post('/api/templates/bills', this.modelFormValue, { responseType: 'blob' })
+        this.billsService.generateReport(this.modelFormValue)
             .subscribe((file) => {
                 saveAs(file, `Счет_Акт №${this.modelFormValue.number}.docx`);
             });
 
-        this.http.post('/api/data/bill', this.modelFormValue)
+        this.billsService.saveBill(this.modelFormValue)
             .subscribe((data) => {
                 console.log(data);
             });

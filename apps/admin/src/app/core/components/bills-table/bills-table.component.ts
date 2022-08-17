@@ -4,12 +4,9 @@ import {
     OnInit,
 } from '@angular/core';
 import { ICargoTransportationBill } from '@app/api-interfaces';
-import { HttpClient } from '@angular/common/http';
-import {
-    delay,
-    Observable,
-} from 'rxjs';
+import { Observable } from 'rxjs';
 import { PlatformDetectService } from '../../services/platform-detect.service';
+import { BillsService } from '../../services/bills.service';
 
 @Component({
     selector: 'app-bills-table',
@@ -22,14 +19,13 @@ export class BillsTableComponent implements OnInit {
     public modelFormDisplayed = false;
 
     constructor(
-        private readonly http: HttpClient,
         private readonly platformDetectService: PlatformDetectService,
+        private readonly billsService: BillsService,
     ) {}
 
     public ngOnInit() {
         if (!this.platformDetectService.isServer) {
-            this.bills$ = this.http.get<ICargoTransportationBill[]>('/api/data/bill')
-                .pipe(delay(1000));
+            this.bills$ = this.billsService.getAll();
         }
     }
 
