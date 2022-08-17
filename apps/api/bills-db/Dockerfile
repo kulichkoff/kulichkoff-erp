@@ -11,6 +11,6 @@ COPY --from=build /usr/src/app/package.json \
     /usr/src/app/yarn.lock \
     /usr/src/app/ormconfig.json \
     ./
-RUN yarn install --prod --ignore-scripts
+RUN yarn install --prod --ignore-scripts && rm yarn.lock
 EXPOSE 3333
 CMD ["sh", "-c", "node dist/apps/api/bills-db/main.js"]
