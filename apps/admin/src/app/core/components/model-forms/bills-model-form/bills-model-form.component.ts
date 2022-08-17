@@ -1,6 +1,7 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    OnInit,
 } from '@angular/core';
 import {
     FormArray,
@@ -8,9 +9,13 @@ import {
     FormGroup,
     Validators,
 } from '@angular/forms';
-import { ICargoTransportationBill } from '@app/api-interfaces';
+import {
+    ICargoTransportationBill,
+    ICustomer,
+} from '@app/api-interfaces';
 import { HttpClient } from '@angular/common/http';
 import { saveAs } from 'file-saver';
+import { take } from 'rxjs';
 
 @Component({
     selector: 'app-bills-model-form',
@@ -18,7 +23,7 @@ import { saveAs } from 'file-saver';
     styleUrls: ['./bills-model-form.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BillsModelFormComponent {
+export class BillsModelFormComponent implements OnInit {
 
     public modelForm: FormGroup = this.fb.group({
         number: ['', Validators.required],
@@ -50,18 +55,19 @@ export class BillsModelFormComponent {
 
     public customersResult: string[] = [];
 
-    // TODO: Create new and get them from the server
-    private customersList = [
-        'ООО «АЛЬТАИР»',
-        'ООО «ВСЯ ЛОГИСТИКА.РУ»',
-        'ООО «АРМТЕК»',
-        'ООО «ИТА АВТО»',
-    ];
+    private customersList: string[] = [];
 
     constructor(
         private readonly fb: FormBuilder,
         private readonly http: HttpClient,
     ) {}
+
+    public ngOnInit() {
+        this.http.get<ICustomer[]>('/api/data/customer')
+            .subscribe((customers) => {
+                this.customersList = customers.map((customer) => customer.name);
+            })
+    }
 
     public get servicesArray(): FormArray {
         return this.modelForm.controls['services'] as FormArray;

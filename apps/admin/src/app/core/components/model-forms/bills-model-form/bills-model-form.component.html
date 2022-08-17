@@ -38,6 +38,7 @@
         <ng-container formArrayName="services">
             <ng-container *ngFor="let service of servicesArray.controls; let serviceIdx = index">
                 <ng-container [formGroup]="$any(service)">
+                    <h2>Услуга №{{serviceIdx + 1}}</h2>
                     <div class="mt-5 grid w-full">
                         <div class="flex flex-column lg:col-4 col-12">
                             <h3>Цена</h3>
