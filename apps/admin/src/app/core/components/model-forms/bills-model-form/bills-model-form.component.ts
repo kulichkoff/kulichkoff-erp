@@ -15,7 +15,6 @@ import {
 } from '@app/api-interfaces';
 import { HttpClient } from '@angular/common/http';
 import { saveAs } from 'file-saver';
-import { take } from 'rxjs';
 
 @Component({
     selector: 'app-bills-model-form',
