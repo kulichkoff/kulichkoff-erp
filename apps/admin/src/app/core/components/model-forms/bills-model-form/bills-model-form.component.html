@@ -12,10 +12,8 @@
         <div class="flex flex-column lg:col-5 col-12">
             <h3>От</h3>
             <p-calendar
-                formControlName="fromDate" [firstDayOfWeek]="1"
-                [showIcon]="true" styleClass="w-full" class="w-full"
-                dateFormat="dd.mm.yy" dataType="string"
-            ></p-calendar>
+                formControlName="fromDate" [showIcon]="true" styleClass="w-full" class="w-full"
+                dataType="string"></p-calendar>
         </div>
 
         <div class="flex flex-column lg:col-4 col-12">
@@ -61,9 +59,9 @@
                                     <div class="flex flex-column lg:col-4 col-12">
                                         <h3>Дата загрузки</h3>
                                         <p-calendar
-                                            formControlName="date" [firstDayOfWeek]="1"
-                                            [showIcon]="true" styleClass="w-full" class="w-full"
-                                            dateFormat="dd.mm.yy" dataType="string"></p-calendar>
+                                            formControlName="date" [showIcon]="true"
+                                            styleClass="w-full" class="w-full"
+                                            dataType="string"></p-calendar>
                                     </div>
                                 </div>
                             </ng-container>
@@ -83,9 +81,8 @@
                                     <div class="flex flex-column lg:col-4 col-12">
                                         <h3>Дата выгрузки</h3>
                                         <p-calendar
-                                            formControlName="date" [firstDayOfWeek]="1"
-                                            [showIcon]="true" styleClass="w-full" class="w-full"
-                                            dateFormat="dd.mm.yy" dataType="string"
+                                            formControlName="date" [showIcon]="true"
+                                            styleClass="w-full" class="w-full" dataType="string"
                                             [minDate]="getMinimalDate(serviceIdx, unloadingIdx)"></p-calendar>
                                     </div>
                                 </div>
