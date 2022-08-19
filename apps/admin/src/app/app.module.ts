@@ -9,6 +9,7 @@ import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
     declarations: [AppComponent],
@@ -21,6 +22,7 @@ import { AppRoutingModule } from './app-routing.module';
         RippleModule,
         CoreModule,
         AppRoutingModule,
+        ToastModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

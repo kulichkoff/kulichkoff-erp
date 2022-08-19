@@ -13,6 +13,12 @@ import { ICargoTransportationBill } from '@app/api-interfaces';
 import { saveAs } from 'file-saver';
 import { CustomersService } from '../../../services/customers.service';
 import { BillsService } from '../../../services/bills.service';
+import { MessageService } from 'primeng/api';
+import {
+    catchError,
+    EMPTY,
+} from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-bills-model-form',
@@ -58,15 +64,16 @@ export class BillsModelFormComponent implements OnInit {
         private readonly fb: FormBuilder,
         private readonly customersService: CustomersService,
         private readonly billsService: BillsService,
+        private readonly messageService: MessageService,
     ) {}
 
     public ngOnInit() {
         this.customersService.getAll()
-        .subscribe((customers) => {
-            this.customersList = customers.map(
-                (customer) => `${customer.name}, ${customer.city}, ИНН ${customer.inn}`,
-            );
-        });
+            .subscribe((customers) => {
+                this.customersList = customers.map(
+                    (customer) => `${customer.name}, ${customer.city}, ИНН ${customer.inn}`,
+                );
+            });
     }
 
     public get servicesArray(): FormArray {
@@ -98,8 +105,26 @@ export class BillsModelFormComponent implements OnInit {
             });
 
         this.billsService.saveBill(this.modelFormValue)
-            .subscribe((data) => {
-                console.log(data);
+            .pipe(
+                catchError((err) => {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'Произошла какая-то ошибка',
+                        detail: `
+                            Убедитесь, что все поля заполнены правильно. 
+                            Код ошибки: ${(err as HttpErrorResponse).status} | ${(err as HttpErrorResponse).statusText}
+                        `,
+                    });
+                    console.error(err);
+                    return EMPTY;
+                }),
+            )
+            .subscribe(() => {
+                this.messageService.add({
+                    severity: 'success',
+                    summary: 'Успешно сохранено',
+                    detail: 'Если новый счет не появился в таблице, перезагрузите страницу',
+                });
             });
     }
 

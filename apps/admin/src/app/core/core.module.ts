@@ -21,6 +21,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { DividerModule } from 'primeng/divider';
 import { CalendarModule } from 'primeng/calendar';
 import { SharedPipesModule } from '@app/shared-pipes';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
     declarations: [
@@ -48,8 +50,15 @@ import { SharedPipesModule } from '@app/shared-pipes';
         DividerModule,
         CalendarModule,
         SharedPipesModule,
+        ToastModule,
     ],
-    exports: [HeaderComponent, StatsCardsComponent],
+    exports: [
+        HeaderComponent,
+        StatsCardsComponent,
+    ],
+    providers: [
+        MessageService,
+    ]
 })
 export class CoreModule {
 }
