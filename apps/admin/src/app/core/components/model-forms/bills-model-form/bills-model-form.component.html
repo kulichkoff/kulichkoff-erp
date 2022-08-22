@@ -9,11 +9,19 @@
                 styleClass="w-full"></p-inputNumber>
         </div>
 
-        <div class="flex flex-column lg:col-5 col-12">
+        <div class="flex flex-column lg:col-2 col-12">
             <h3>От</h3>
             <p-calendar
                 formControlName="fromDate" [showIcon]="true" styleClass="w-full" class="w-full"
                 dataType="string"></p-calendar>
+        </div>
+
+        <div class="flex flex-column lg:col-7 col-12">
+            <h3>Заказчик</h3>
+            <p-autoComplete
+                styleClass="w-full" inputStyleClass="w-full" formControlName="customerName"
+                [suggestions]="customersResult"
+                (completeMethod)="searchCustomerName($event)"></p-autoComplete>
         </div>
 
         <div class="flex flex-column lg:col-4 col-12">
@@ -23,12 +31,11 @@
                 styleClass="w-full"></p-inputNumber>
         </div>
 
-        <div class="flex flex-column lg:col-7 col-12">
-            <h3>Заказчик</h3>
-            <p-autoComplete
-                styleClass="w-full" inputStyleClass="w-full" formControlName="customerName"
-                [suggestions]="customersResult"
-                (completeMethod)="searchCustomerName($event)"></p-autoComplete>
+        <div class="flex flex-column lg:col-2 col-12">
+            <h3>От</h3>
+            <p-calendar
+                formControlName="contractFromDate" [showIcon]="true" styleClass="w-full" class="w-full"
+                dataType="string"></p-calendar>
         </div>
 
         <p-divider styleClass="w-full" class="w-full"></p-divider>

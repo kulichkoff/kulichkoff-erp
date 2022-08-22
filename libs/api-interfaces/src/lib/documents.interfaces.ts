@@ -16,6 +16,7 @@ export interface ICargoTransportationBill extends IDocument {
     customer: ICustomer;
     number: number;
     contractNumber: number;
+    contractFromDate: string;
     services: {
         type: string;
         description: string;

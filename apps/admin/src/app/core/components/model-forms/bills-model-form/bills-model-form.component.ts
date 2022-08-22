@@ -33,11 +33,10 @@ export class BillsModelFormComponent implements OnInit {
         customerName: '',
         contractNumber: '',
         fromDate: new Date().toLocaleDateString('ru-RU'),
-        totalPrice: 0, // renders on the server
+        contractFromDate: new Date().toLocaleDateString('ru-RU'),
         services: this.fb.array([
             this.fb.group({
                 type: 'cargo_transportation',
-                description: '', // renders on the server
                 count: 1,
                 price: '',
                 sending: this.fb.array([

@@ -17,8 +17,11 @@ export class Bill extends BaseEntity {
     @Column({ type: 'int' })
     number: number;
 
-    @Column({ type: 'int' })
+    @Column({ type: 'int', nullable: true })
     contractNumber: number;
+
+    @Column({ type: 'varchar', length: 32, nullable: true })
+    contractFromDate: string;
 
     @Column({ type: 'float' })
     totalPrice: number;
