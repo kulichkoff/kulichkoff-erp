@@ -18,6 +18,13 @@ export class BillService {
         private readonly customerService: CustomerService,
     ) {}
 
+    public async getLastBillNumber(): Promise<number> {
+        return (await this.repo.findOne({
+            select: ['number'],
+            order: { number: 'DESC' },
+        })).number;
+    }
+
     public async getAll(): Promise<Bill[]> {
         return await this.repo.createQueryBuilder('bill')
             .leftJoinAndSelect('bill.customer', 'customer')

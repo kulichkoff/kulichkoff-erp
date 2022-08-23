@@ -18,6 +18,11 @@ export class BillController {
         return await this.service.getAll();
     }
 
+    @Get('last')
+    public async getLastNumber() {
+        return await this.service.getLastBillNumber();
+    }
+
     @Post()
     public async createOne(@Body() billData: ICargoTransportationBill) {
         return await this.service.createOne(billData);
