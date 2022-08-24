@@ -17,6 +17,7 @@ import { MessageService } from 'primeng/api';
 import {
     catchError,
     EMPTY,
+    Observable,
 } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -59,6 +60,8 @@ export class BillsModelFormComponent implements OnInit {
 
     private customersList: string[] = [];
 
+    public lastBillNumber?: number;
+
     constructor(
         private readonly fb: FormBuilder,
         private readonly customersService: CustomersService,
@@ -72,6 +75,14 @@ export class BillsModelFormComponent implements OnInit {
                 this.customersList = customers.map(
                     (customer) => `${customer.name}, ${customer.city}, ИНН ${customer.inn}`,
                 );
+            });
+
+        this.billsService.getLastBillNumber()
+            .subscribe((lastNumber) => {
+                this.lastBillNumber = lastNumber;
+                this.modelForm.patchValue({
+                    number: lastNumber + 1,
+                })
             });
     }
 

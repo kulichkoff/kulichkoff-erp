@@ -16,6 +16,10 @@ export class BillsService {
         return this.http.get<ICargoTransportationBill[]>('/api/data/bill');
     }
 
+    public getLastBillNumber(): Observable<number> {
+        return this.http.get<number>('/api/data/bill/last');
+    }
+
     public saveBill(billData: ICargoTransportationBill): Observable<ICargoTransportationBill> {
         return this.http.post<ICargoTransportationBill>('/api/data/bill', billData);
     }
