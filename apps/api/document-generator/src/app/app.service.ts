@@ -22,8 +22,6 @@ export class AppService {
             data: {
                 ...billData,
                 date: billData.fromDate,
-                customerCity: 'г.Москва',
-                customerBill: '9721157244',
                 totalPrice: totalPrice,
                 totalPriceNumeral: convertNumberToWordsRu(totalPrice),
             },
