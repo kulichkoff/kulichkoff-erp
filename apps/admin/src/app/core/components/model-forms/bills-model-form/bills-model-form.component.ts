@@ -17,7 +17,6 @@ import { MessageService } from 'primeng/api';
 import {
     catchError,
     EMPTY,
-    Observable,
 } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -82,7 +81,7 @@ export class BillsModelFormComponent implements OnInit {
                 this.lastBillNumber = lastNumber;
                 this.modelForm.patchValue({
                     number: lastNumber + 1,
-                })
+                });
             });
     }
 
@@ -108,12 +107,6 @@ export class BillsModelFormComponent implements OnInit {
     }
 
     public onSubmit() {
-        console.log(this.modelFormValue);
-        this.billsService.generateReport(this.modelFormValue)
-            .subscribe((file) => {
-                saveAs(file, `Счет_Акт №${this.modelFormValue.number}.docx`);
-            });
-
         this.billsService.saveBill(this.modelFormValue)
             .pipe(
                 catchError((err) => {
@@ -135,6 +128,13 @@ export class BillsModelFormComponent implements OnInit {
                     summary: 'Успешно сохранено',
                     detail: 'Если новый счет не появился в таблице, перезагрузите страницу',
                 });
+            });
+    }
+
+    public onGenerateBtnClicked() {
+        this.billsService.generateReport(this.modelFormValue)
+            .subscribe((file) => {
+                saveAs(file, `Счет_Акт №${this.modelFormValue.number}.docx`);
             });
     }
 

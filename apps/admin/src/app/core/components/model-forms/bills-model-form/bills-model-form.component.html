@@ -34,8 +34,8 @@
         <div class="flex flex-column lg:col-2 col-12">
             <h3>От</h3>
             <p-calendar
-                formControlName="contractFromDate" [showIcon]="true" styleClass="w-full" class="w-full"
-                dataType="string"></p-calendar>
+                formControlName="contractFromDate" [showIcon]="true" styleClass="w-full"
+                class="w-full" dataType="string"></p-calendar>
         </div>
 
         <p-divider styleClass="w-full" class="w-full"></p-divider>
@@ -56,7 +56,7 @@
                         <ng-container
                             *ngFor="let sendingItem of sendingArray.controls; let sendingIdx = index">
                             <ng-container [formGroup]="$any(sendingItem)">
-                                <div class="mt-6 p-2 grid w-full">
+                                <div class="mt-4 p-2 grid w-full">
                                     <div class="flex flex-column lg:col-4 col-12">
                                         <h3>Точка загрузки №{{sendingIdx + 1}}</h3>
                                         <input
@@ -100,5 +100,11 @@
             </ng-container>
         </ng-container>
     </div>
-    <button type="submit" pButton pRipple label="Сохранить" class="mt-6 w-full md:w-2"></button>
+
+    <div class="flex md:flex-row flex-column gap-2 mt-6">
+        <button type="submit" pButton pRipple label="Сохранить" class="w-full md:w-2"></button>
+        <button
+            type="button" (click)="onGenerateBtnClicked()" pButton pRipple label="Скачать документ"
+            class="p-button-success w-full md:w-3"></button>
+    </div>
 </form>
