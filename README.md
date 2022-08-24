@@ -18,8 +18,9 @@ yarn nx run [application-name]:serve
 
 ## What I want to do in the future
 
-- Use Docker to deploy this microservice architecture.
-- Documents generation.
+- [x] Use Docker to deploy this microservice architecture.
+- [x] Documents generation.
+- [ ] Smart RxJS unsubscribe with `@ngneat/until-destroy`
 
 ## Migrations
 
