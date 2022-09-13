@@ -13,7 +13,7 @@ describe('CurrencyPipe', () => {
         const pipe = new CurrencyPipe();
         expect(pipe.transform(4.5)).toBe('4,5');
         expect(pipe.transform(455.9)).toBe('455,9');
-        expect(pipe.transform(65789.123)).toBe('65 789,123');
+        expect(pipe.transform(658.123)).toBe('658,123');
     });
 
     it('should add currency character at end', () => {
