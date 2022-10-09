@@ -1,7 +1,8 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    OnInit,
+    Input,
+    OnChanges,
 } from '@angular/core';
 import {
     FormArray,
@@ -26,34 +27,11 @@ import { HttpErrorResponse } from '@angular/common/http';
     styleUrls: ['./bills-model-form.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BillsModelFormComponent implements OnInit {
+export class BillsModelFormComponent implements OnChanges {
 
-    public modelForm: FormGroup = this.fb.group({
-        number: ['', Validators.required],
-        customerName: '',
-        contractNumber: '',
-        fromDate: new Date().toLocaleDateString('ru-RU'),
-        contractFromDate: new Date().toLocaleDateString('ru-RU'),
-        services: this.fb.array([
-            this.fb.group({
-                type: 'cargo_transportation',
-                count: 1,
-                price: '',
-                sending: this.fb.array([
-                    this.fb.group({
-                        point: '',
-                        date: '',
-                    }),
-                ]),
-                unloading: this.fb.array([
-                    this.fb.group({
-                        point: '',
-                        date: '',
-                    }),
-                ]),
-            }),
-        ]),
-    });
+    @Input() billToEdit?: ICargoTransportationBill;
+
+    public modelForm!: FormGroup;
 
     public customersResult: string[] = [];
 
@@ -68,7 +46,9 @@ export class BillsModelFormComponent implements OnInit {
         private readonly messageService: MessageService,
     ) {}
 
-    public ngOnInit() {
+    public ngOnChanges() {
+        this.buildForm();
+
         this.customersService.getAll()
             .subscribe((customers) => {
                 this.customersList = customers.map(
@@ -76,13 +56,50 @@ export class BillsModelFormComponent implements OnInit {
                 );
             });
 
-        this.billsService.getLastBillNumber()
-            .subscribe((lastNumber) => {
-                this.lastBillNumber = lastNumber;
-                this.modelForm.patchValue({
-                    number: lastNumber + 1,
-                });
+        if (this.billToEdit) {
+            const billToEditCpy = JSON.parse(JSON.stringify(this.billToEdit));
+            this.modelForm.patchValue({
+                ...billToEditCpy,
+                customerName: `${billToEditCpy.customer.name}, ${billToEditCpy.customer.city}, ИНН ${billToEditCpy.customer.inn}`,
             });
+        } else {
+            this.billsService.getLastBillNumber()
+                .subscribe((lastNumber) => {
+                    this.lastBillNumber = lastNumber;
+                    this.modelForm.patchValue({
+                        number: lastNumber + 1,
+                    });
+                });
+        }
+    }
+
+    private buildForm() {
+        this.modelForm = this.fb.group({
+            number: ['', Validators.required],
+            customerName: '',
+            contractNumber: '',
+            fromDate: new Date().toLocaleDateString('ru-RU'),
+            contractFromDate: new Date().toLocaleDateString('ru-RU'),
+            services: this.fb.array([
+                this.fb.group({
+                    type: 'cargo_transportation',
+                    count: 1,
+                    price: '',
+                    sending: this.fb.array([
+                        this.fb.group({
+                            point: '',
+                            date: '',
+                        }),
+                    ]),
+                    unloading: this.fb.array([
+                        this.fb.group({
+                            point: '',
+                            date: '',
+                        }),
+                    ]),
+                }),
+            ]),
+        });
     }
 
     public get servicesArray(): FormArray {
@@ -107,28 +124,53 @@ export class BillsModelFormComponent implements OnInit {
     }
 
     public onSubmit() {
-        this.billsService.saveBill(this.modelFormValue)
-            .pipe(
-                catchError((err) => {
-                    this.messageService.add({
-                        severity: 'error',
-                        summary: 'Произошла какая-то ошибка',
-                        detail: `
+        if (this.billToEdit) {
+            this.billsService.editBill(this.billToEdit.id, this.modelFormValue)
+                .pipe(
+                    catchError((err) => {
+                        this.messageService.add({
+                            severity: 'error',
+                            summary: 'Произошла какая-то ошибка',
+                            detail: `
                             Убедитесь, что все поля заполнены правильно. 
                             Код ошибки: ${(err as HttpErrorResponse).status} | ${(err as HttpErrorResponse).statusText}
                         `,
+                        });
+                        console.error(err);
+                        return EMPTY;
+                    }),
+                )
+                .subscribe(() => {
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Успешно сохранено',
+                        detail: 'Если новый счет не появился в таблице, перезагрузите страницу',
                     });
-                    console.error(err);
-                    return EMPTY;
-                }),
-            )
-            .subscribe(() => {
-                this.messageService.add({
-                    severity: 'success',
-                    summary: 'Успешно сохранено',
-                    detail: 'Если новый счет не появился в таблице, перезагрузите страницу',
                 });
-            });
+        } else {
+            this.billsService.saveBill(this.modelFormValue)
+                .pipe(
+                    catchError((err) => {
+                        this.messageService.add({
+                            severity: 'error',
+                            summary: 'Произошла какая-то ошибка',
+                            detail: `
+                            Убедитесь, что все поля заполнены правильно. 
+                            Код ошибки: ${(err as HttpErrorResponse).status} | ${(err as HttpErrorResponse).statusText}
+                        `,
+                        });
+                        console.error(err);
+                        return EMPTY;
+                    }),
+                )
+                .subscribe(() => {
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Успешно сохранено',
+                        detail: 'Если новый счет не появился в таблице, перезагрузите страницу',
+                    });
+                });
+        }
     }
 
     public onGenerateBtnClicked() {

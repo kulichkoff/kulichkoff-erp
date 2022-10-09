@@ -67,4 +67,30 @@ export class BillService {
 
         return totalPrice;
     }
+
+    public async editBill(id: ICargoTransportationBill['id'], billData: ICargoTransportationBill) {
+        try {
+            const nameTextSplit = billData.customer.name
+                .replace('ИНН', '')
+                .split(', ');
+
+            const customer = await this.customerService.find({
+                name: nameTextSplit[0].trim(),
+                city: nameTextSplit[1].trim(),
+                inn: nameTextSplit[2].trim(),
+            });
+
+            const completedObject = {
+                ...billData,
+                totalPrice: this.getTotalPrice(billData.services),
+                customer,
+                id,
+            };
+
+            return await this.repo.save(completedObject);
+        } catch (e) {
+            Logger.error(e);
+            throw new HttpException((e as Error).message, HttpStatus.BAD_REQUEST);
+        }
+    }
 }

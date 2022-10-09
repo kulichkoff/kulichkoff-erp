@@ -13,6 +13,7 @@ export interface IDocument {
 }
 
 export interface ICargoTransportationBill extends IDocument {
+    id: any,
     customer: ICustomer;
     number: number;
     contractNumber: number;

@@ -2,6 +2,8 @@ import {
     Body,
     Controller,
     Get,
+    Param,
+    Patch,
     Post,
 } from '@nestjs/common';
 import { BillService } from './bill.service';
@@ -26,5 +28,10 @@ export class BillController {
     @Post()
     public async createOne(@Body() billData: ICargoTransportationBill) {
         return await this.service.createOne(billData);
+    }
+
+    @Patch(':id')
+    public async editBill(@Param('id') id: ICargoTransportationBill['id'], @Body() billData: ICargoTransportationBill) {
+        return await this.service.editBill(id, billData);
     }
 }

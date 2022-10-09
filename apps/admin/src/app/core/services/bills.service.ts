@@ -24,6 +24,10 @@ export class BillsService {
         return this.http.post<ICargoTransportationBill>('/api/data/bill', billData);
     }
 
+    public editBill(id: ICargoTransportationBill['id'], billData: ICargoTransportationBill): Observable<ICargoTransportationBill> {
+        return this.http.patch<ICargoTransportationBill>(`/api/data/bill/${id}`, billData);
+    }
+
     public generateReport(billData: ICargoTransportationBill): Observable<Blob> {
         return this.http.post('/api/templates/bills', billData, { responseType: 'blob' })
     }

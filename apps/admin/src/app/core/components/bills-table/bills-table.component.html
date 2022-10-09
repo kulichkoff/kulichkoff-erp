@@ -71,7 +71,8 @@
 <p-contextMenu #cm [model]="contextMenu"></p-contextMenu>
 
 <p-dialog
-    header="Создать новый счет" [(visible)]="modelFormDisplayed" [draggable]="false" [modal]="true"
-    [style]="{ width: '70rem' }">
-    <app-bills-model-form></app-bills-model-form>
+    [header]="billToEdit ? 'Изменение счета' : 'Создать новый счет'"
+    [(visible)]="modelFormDisplayed" [draggable]="false" [modal]="true" [style]="{ width: '70rem' }"
+    (onHide)="onModalFormClose()">
+    <app-bills-model-form [billToEdit]="billToEdit"></app-bills-model-form>
 </p-dialog>

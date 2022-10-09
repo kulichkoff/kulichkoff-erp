@@ -1,5 +1,6 @@
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     OnInit,
 } from '@angular/core';
@@ -20,12 +21,24 @@ export class BillsTableComponent implements OnInit {
 
     public bills$?: Observable<ICargoTransportationBill[]>;
     public selectedBill?: ICargoTransportationBill;
+    public billToEdit?: ICargoTransportationBill;
 
     public modelFormDisplayed = false;
 
     public contextMenu: MenuItem[] = [
         {
-            label: 'Скачать документ',
+            label: 'Изменить',
+            icon: 'pi pi-pencil',
+            command: () => {
+                if (!this.selectedBill) {
+                    throw new Error('No selected bill');
+                }
+                this.billToEdit = this.selectedBill;
+                this.displayModelForm();
+            },
+        },
+        {
+            label: 'Скачать',
             icon: 'pi pi-file',
             command: () => {
                 if (!this.selectedBill) {
@@ -36,19 +49,24 @@ export class BillsTableComponent implements OnInit {
                     .subscribe((file) => {
                         saveAs(file, `Счет_Акт №${selectedBillCpy.number}.docx`);
                     });
-            }
-        }
+            },
+        },
     ];
 
     constructor(
         private readonly platformDetectService: PlatformDetectService,
         private readonly billsService: BillsService,
+        private readonly changeDetector: ChangeDetectorRef,
     ) {}
 
     public ngOnInit() {
         if (!this.platformDetectService.isServer) {
             this.bills$ = this.billsService.getAll();
         }
+    }
+
+    public onModalFormClose() {
+        delete this.billToEdit;
     }
 
     public onAddBtnClicked() {
