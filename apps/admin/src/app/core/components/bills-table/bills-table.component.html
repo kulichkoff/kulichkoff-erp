@@ -12,7 +12,7 @@
         </p-toolbar>
         <ng-container *ngIf="(bills$ | async) as bills; else billsSpinner">
             <p-table
-                [value]="bills" dataKey="_id" sortField="fromDate" [scrollable]="true"
+                [value]="bills" dataKey="_id" sortField="number" [scrollable]="true"
                 scrollHeight="800px" scrollDirection="both" class="w-full" [contextMenu]="cm"
                 [(contextMenuSelection)]="selectedBill"
                 [globalFilterFields]="['number', 'fromDate', 'customerName', 'contractNumber', 'price']"
