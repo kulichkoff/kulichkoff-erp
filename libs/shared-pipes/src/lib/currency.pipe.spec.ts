@@ -31,4 +31,12 @@ describe('CurrencyPipe', () => {
         expect(pipe.transform(8.4, 'euR')).toBe('8,4 €');
         expect(pipe.transform(8.4, 'aAa')).toBe('8,4');
     })
+
+    it('should implement method toFixed(2)', () => {
+        const pipe = new CurrencyPipe();
+        expect(pipe.transform(8, 'uSd', 2)).toBe('8,00 $');
+        expect(pipe.transform(8.2, 'uSd', 2)).toBe('8,20 $');
+        expect(pipe.transform(8.02, 'uSd', 2)).toBe('8,02 $');
+        expect(pipe.transform(8.023, 'uSd', 2)).toBe('8,02 $');
+    });
 });

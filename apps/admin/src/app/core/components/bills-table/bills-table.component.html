@@ -56,7 +56,7 @@
                         <td class="w-3">{{bill['fromDate']}}</td>
                         <td class="w-4">{{bill['customer']['name']}}</td>
                         <td class="w-2">{{bill['contractNumber']}}</td>
-                        <td class="w-2">{{bill['totalPrice'] | currency:'rub'}}</td>
+                        <td class="w-2">{{bill['totalPrice'] | currency:'rub': 2}}</td>
                     </tr>
                 </ng-template>
             </p-table>
